@@ -1,4 +1,4 @@
- **QueueItUp 2.5.3.9** Now with added BatchItUp feature
+ **QueueItUp 2.6** Now with added BatchItUp feature
  
 <img width="1679" alt="Screenshot 2024-05-09 110834" src="https://github.com/chuckkay/QueueItUp/assets/10617746/ebf49e9b-04f6-4373-9c33-636dd43e23da">
 
@@ -32,6 +32,6 @@ DONE ~~3. Something about Henry's code has me baffeled, so unfortunaitly when it
 added a BATCH Maker called BatchItup, a button is located on every job in the edit queue window, an example of what you can do with an existing job is,  you can select multiple target videos or images, using a single source and it will create a job for each source, or or vica versa, you can select multiple sorce faces and a pply it to 1 image or video to make multiple version of the target image or video,  
 
 
-Speaking of cache, yes, please feel free to donate... and enjoy QueueItUp 2.5.3! 😊
+Speaking of cache, yes, please feel free to donate... and enjoy QueueItUp 2.6! 😊
 
 
