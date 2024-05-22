@@ -60,7 +60,7 @@ def analyse_stream(vision_frame : VisionFrame, video_fps : Fps) -> bool:
 
 
 def analyse_frame(vision_frame : VisionFrame) -> bool:
-    content_analyser = get_content_analyser()
+    #content_analyser = get_content_analyser()
     vision_frame = prepare_frame(vision_frame)
     conditional_thread_semaphore(facefusion.globals.execution_providers)
 
