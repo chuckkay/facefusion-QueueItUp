@@ -84,7 +84,7 @@ def render() -> gr.Blocks:
 def listen() -> None:
     global EDIT_JOB_BUTTON, STATUS_WINDOW
     ADD_JOB_BUTTON.click(assemble_queue, outputs=STATUS_WINDOW)
-    RUN_JOBS_BUTTON.click(execute_jobs, outputs=STATUS_WINDOW)
+    RUN_JOBS_BUTTON.click(execute_jobs)
     EDIT_JOB_BUTTON.click(edit_queue, outputs=STATUS_WINDOW)
     SETTINGS_BUTTON.click(queueitup_settings)
     frame_processors.listen()
@@ -306,19 +306,17 @@ def execute_jobs():
             
             save_jobs(jobs_queue_file, jobs)
         else:#no more pending jobs
-            message = f"A total of {CURRENT_JOB_NUMBER} Jobs have completed processing,...... the Queue is now empty, Feel Free to QueueItUp some more.."
-            custom_print(f"{BLUE}a total of {CURRENT_JOB_NUMBER} Jobs have completed processing,{ENDC}...... {GREEN}the Queue is now empty, {BLUE}Feel Free to QueueItUp some more..{ENDC}")
+             custom_print(f"{BLUE}a total of {CURRENT_JOB_NUMBER} Jobs have completed processing,{ENDC}...... {GREEN}the Queue is now empty, {BLUE}Feel Free to QueueItUp some more..{ENDC}")
             current_run_job = None
             first_pending_job = None
             break
     JOB_IS_RUNNING = 0
     save_jobs(jobs_queue_file, jobs)
     check_for_unneeded_media_cache()
-    STATUS_WINDOW.value = last_justtextmsg
-    return STATUS_WINDOW.value
+
 
 def edit_queue():
-    global root, frame, output_text, edit_queue_window, STATUS_WINDOW, default_values, jobs_queue_file, jobs, job, image_references, thumbnail_dir, working_dir, PENDING_JOBS_COUNT, pending_jobs_var, debugging, keep_completed_jobs
+    global root, frame, edit_queue_window, STATUS_WINDOW, jobs_queue_file, jobs, job, image_references, thumbnail_dir, working_dir, PENDING_JOBS_COUNT
     root = tk.Tk()
     jobs = load_jobs(jobs_queue_file)
     PENDING_JOBS_COUNT = count_existing_jobs()
@@ -348,11 +346,15 @@ def edit_queue():
     pending_jobs_var = tk.StringVar()
     pending_jobs_var.set(f"Delete {PENDING_JOBS_COUNT} Pending Jobs")
 
+
     close_button = tk.Button(root, text="Close Window", command=root.destroy, font=custom_font)
     close_button.pack(pady=5)
     
     refresh_button = tk.Button(root, text="Refresh View", command=lambda: refresh_buttonclick(), font=custom_font)
     refresh_button.pack(pady=5)
+
+    # run_jobs_button = tk.Button(root, text="Run Pending Jobs", command=lambda: run_jobs_click(), font=custom_font)
+    # run_jobs_button.pack(pady=5)
 
     pending_jobs_button = tk.Button(root, textvariable=pending_jobs_var, command=lambda: delete_pending_jobs(), font=custom_font)
     pending_jobs_button.pack(pady=5)
@@ -369,7 +371,10 @@ def edit_queue():
     completed_jobs_button = tk.Button(root, text="Delete Completed", command=lambda: delete_completed_jobs(), font=custom_font)
     completed_jobs_button.pack(pady=5)
     
-        
+    # def run_jobs_click():
+        # save_jobs(jobs_queue_file, jobs)
+        # execute_jobs()
+    
     def refresh_buttonclick():
         count_existing_jobs()
         update_job_listbox()
@@ -410,7 +415,8 @@ def edit_queue():
         jobs = [job for job in jobs if job['status'] != 'missing']
         save_jobs(jobs_queue_file, jobs)
         refresh_frame_listbox()
-
+        
+       
     def archive_job(job):
         job['status'] = 'archived'
         save_jobs(jobs_queue_file, jobs) 
@@ -472,13 +478,20 @@ def edit_queue():
 
     def delete_job(job):
         job['status'] = ('deleting')
-        source_or_target='both'
         check_if_needed(job, 'both')
         jobs.remove(job)
         save_jobs(jobs_queue_file, jobs)
         update_job_listbox()  
         refresh_frame_listbox()
-
+        
+    def clone_job(job):
+        clonedjob = job  
+        jobs = load_jobs(jobs_queue_file)        
+        jobs.append(clonedjob)
+        save_jobs(jobs_queue_file, jobs)
+        update_job_listbox()  
+        refresh_frame_listbox()
+        
     def move_job_up(index):
         if index > 0:
             jobs.insert(index - 1, jobs.pop(index))
@@ -506,7 +519,6 @@ def edit_queue():
     def edit_job_arguments_text(job):
         global default_values
         job_args = job.get('job_args', '')
-        preprocessed_defaults = preprocess_execution_providers(default_values)
         edit_arg_window = tk.Toplevel()
         edit_arg_window.title("Edit Job Arguments")
         edit_arg_window.geometry("1050x500")
@@ -585,6 +597,7 @@ def edit_queue():
         canvas.configure(scrollregion=canvas.bbox("all"))
         edit_arg_window.mainloop()
 
+    
     def batch_job(job):
         target_filetype = None
         source_or_target = None
@@ -878,6 +891,9 @@ def edit_queue():
                     
                     archive_button = tk.Button(action_frame, text="Archive", command=lambda j=job: archive_job(j))
                     archive_button.pack(side='top', padx=2)
+                    
+                    clone_job_button = tk.Button(action_frame, text="Clone Job", command=lambda j=job: clone_job(j))
+                    clone_job_button.pack(side='top', padx=2)
                     
                     batch_button = tk.Button(action_frame, text="BatchItUp", command=lambda j=job: batch_job(j))
                     batch_button.pack(side='top', padx=2)
