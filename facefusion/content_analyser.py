@@ -13,7 +13,7 @@ from facefusion.typing import VisionFrame, ModelSet, Fps
 from facefusion.execution import apply_execution_provider_options
 from facefusion.vision import count_video_frame_total, read_image, detect_video_fps
 from facefusion.filesystem import resolve_relative_path
-from facefusion.download import conditional_download
+#from facefusion.download import conditional_download
 
 CONTENT_ANALYSER = None
 MODELS : ModelSet =\
