@@ -306,7 +306,7 @@ def execute_jobs():
             
             save_jobs(jobs_queue_file, jobs)
         else:#no more pending jobs
-             custom_print(f"{BLUE}a total of {CURRENT_JOB_NUMBER} Jobs have completed processing,{ENDC}...... {GREEN}the Queue is now empty, {BLUE}Feel Free to QueueItUp some more..{ENDC}")
+            custom_print(f"{BLUE}a total of {CURRENT_JOB_NUMBER} Jobs have completed processing,{ENDC}...... {GREEN}the Queue is now empty, {BLUE}Feel Free to QueueItUp some more..{ENDC}")
             current_run_job = None
             first_pending_job = None
             break
