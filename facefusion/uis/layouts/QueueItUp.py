@@ -1510,7 +1510,7 @@ automatic1111 = os.path.isfile(os.path.join(base_dir, "flavor.txt")) and "automa
 if automatic1111:
     print("automatic1111")
     # from facefusion import core2
-    # import facefusion.core2 as core2
+    import facefusion.core2 as core2
     venv_python = os.path.normpath(os.path.join(os.path.dirname(os.path.dirname(base_dir)), 'venv', 'scripts', 'python.exe'))
     debug_print("Venv Python Path:", venv_python)
 default_values = get_values_from_globals("default_values")
