@@ -1503,7 +1503,7 @@ STATUS_WINDOW = gr.Textbox(label="Job Status", interactive=True)
 last_justtextmsg = ""
 root = None
 pending_jobs_var = None
-image_references = {}
+image_references = {}   # type: ignore
 default_values = {}
 #code to determin if running inside atutomatic1111
 automatic1111 = os.path.isfile(os.path.join(base_dir, "flavor.txt")) and "automatic1111" in open(os.path.join(base_dir, "flavor.txt")).readline().strip()
