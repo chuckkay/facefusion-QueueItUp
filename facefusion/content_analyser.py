@@ -11,10 +11,9 @@ from facefusion import process_manager, wording
 from facefusion.thread_helper import thread_lock, conditional_thread_semaphore
 from facefusion.typing import VisionFrame, ModelSet, Fps
 from facefusion.execution import apply_execution_provider_options
-from facefusion.vision import count_video_frame_total, read_image
-from facefusion.filesystem import resolve_relative_path
-#from facefusion.download import conditional_download
-
+from facefusion.vision import get_video_frame, count_video_frame_total, read_image, detect_video_fps
+from facefusion.filesystem import resolve_relative_path, is_file
+from facefusion.download import conditional_download
 CONTENT_ANALYSER = None
 MODELS : ModelSet =\
 {
