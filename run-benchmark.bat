@@ -1,1 +1,1 @@
-@echo off && conda activate facefusion-next && python run.py --ui-layouts benchmark --open-browser
+@echo off && conda activate facefusion-next && python run.py --ui-layouts benchmark
