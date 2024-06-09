@@ -1,0 +1,14 @@
+[
+    {
+        "job_args": "--output-image-resolution 1224x1700",
+        "status": "pending",
+        "headless": "--headless",
+        "frame_processors": "face_swapper face_enhancer",
+        "sourcecache": [
+            "C:\\AI\\facefusion-QueueItUp\\QueueItUp\\mediacache\\Actress4.JPG"
+        ],
+        "targetcache": "C:\\AI\\facefusion-QueueItUp\\QueueItUp\\mediacache\\Dava4.jpg",
+        "output_path": "V:\\XXX Reference\\faceswaps\\new",
+        "id": "1e0f8995-4594-4bc8-9ddc-e03a004a3e2d"
+    }
+]

@@ -14,3 +14,65 @@ lip_syncer_models : List[LipSyncerModel] = [ 'wav2lip_gan' ]
 face_enhancer_blend_range : List[int] = create_int_range(0, 100, 1)
 frame_colorizer_blend_range : List[int] = create_int_range(0, 100, 1)
 frame_enhancer_blend_range : List[int] = create_int_range(0, 100, 1)
+
+#
+#
+#
+#
+#
+# PATCH-SLOT-1
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-2
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-3
+frame_enhancer_models.extend([ 'foolhardy_remacri_x4', 'nmkd_siax_x4', 'real_web_photo_x4', 'realistic_rescaler_x4', 'swin2_sr_x4' ])
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-4
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-5
+from typing import Dict
+
+face_swapper_set : Dict[FaceSwapperModel, List[str]] =\
+{
+	'blendswap_256': [ '256x256', '512x512', '768x768', '1024x1024' ],
+	'inswapper_128': [ '128x128', '256x256', '512x512', '768x768', '1024x1024' ],
+	'inswapper_128_fp16': [ '128x128', '256x256', '512x512', '768x768', '1024x1024' ],
+	'simswap_256': [ '256x256', '512x512', '768x768', '1024x1024' ],
+	'simswap_512_unofficial': [ '512x512', '768x768', '1024x1024' ],
+	'uniface_256': [ '256x256', '512x512', '768x768', '1024x1024' ]
+}

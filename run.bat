@@ -1,0 +1,1 @@
+@echo off && conda activate facefusion && python run.py %*

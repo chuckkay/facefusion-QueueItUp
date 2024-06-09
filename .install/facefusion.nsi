@@ -3,6 +3,7 @@
 !include LogicLib.nsh
 
 RequestExecutionLevel admin
+ManifestDPIAware true
 
 Name 'FaceFusion 2.6.0'
 OutFile 'FaceFusion_2.6.0.exe'
@@ -61,7 +62,7 @@ FunctionEnd
 
 Section 'Prepare Your Platform'
 	DetailPrint 'Install GIT'
-	inetc::get 'https://github.com/git-for-windows/git/releases/download/v2.45.1.windows.1/Git-2.45.1-64-bit.exe' '$TEMP\Git.exe'
+	inetc::get 'https://github.com/git-for-windows/git/releases/download/v2.45.2.windows.1/Git-2.45.2-64-bit.exe' '$TEMP\Git.exe'
 	ExecWait '$TEMP\Git.exe /CURRENTUSER /VERYSILENT /DIR=$LOCALAPPDATA\Programs\Git' $0
 	Delete '$TEMP\Git.exe'
 
@@ -106,7 +107,7 @@ Section 'Create Install Batch'
 	FileOpen $1 install-accelerator.bat w
 	FileOpen $2 install-application.bat w
 
-	FileWrite $0 '@echo off && conda activate facefusion && conda install conda-forge::ffmpeg=7.0.0 --yes'
+	FileWrite $0 '@echo off && conda activate facefusion && conda install conda-forge::ffmpeg=7.0.1 --yes'
 	${If} $UseCuda == 1
 		FileWrite $1 '@echo off && conda activate facefusion && conda install cudatoolkit=11.8 cudnn=8.9.2.26 conda-forge::gputil=1.4.0 conda-forge::zlib-wapi --yes'
 		FileWrite $2 '@echo off && conda activate facefusion && python install.py --onnxruntime cuda-11.8'
@@ -148,15 +149,20 @@ SectionEnd
 Section 'Create Run Batch'
 	SetOutPath $INSTDIR
 	FileOpen $0 run.bat w
-	FileWrite $0 '@echo off && conda activate facefusion && python run.py --open-browser'
+	FileWrite $0 '@echo off && conda activate facefusion && python run.py %*'
 	FileClose $0
 SectionEnd
 
 Section 'Register The Application'
 	DetailPrint 'Register The Application'
+
 	CreateDirectory $SMPROGRAMS\FaceFusion
-	CreateShortcut $SMPROGRAMS\FaceFusion\FaceFusion.lnk $INSTDIR\run.bat '' $INSTDIR\.install\facefusion.ico
-	CreateShortcut $DESKTOP\FaceFusion.lnk $INSTDIR\run.bat '' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion.lnk' $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion Benchmark.lnk' $INSTDIR\run.bat '--ui-layouts benchmark --open-browser' $INSTDIR\.install\facefusion.ico
+	CreateShortcut '$SMPROGRAMS\FaceFusion\FaceFusion Webcam.lnk' $INSTDIR\run.bat '--ui-layouts webcam --open-browser' $INSTDIR\.install\facefusion.ico
+
+	CreateShortcut $DESKTOP\FaceFusion.lnk $INSTDIR\run.bat '--open-browser' $INSTDIR\.install\facefusion.ico
+
 	WriteUninstaller $INSTDIR\Uninstall.exe
 
 	WriteRegStr HKLM SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\FaceFusion DisplayName 'FaceFusion'

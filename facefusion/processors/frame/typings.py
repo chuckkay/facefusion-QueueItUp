@@ -39,3 +39,64 @@ LipSyncerInputs = TypedDict('LipSyncerInputs',
 	'source_audio_frame' : AudioFrame,
 	'target_vision_frame' : VisionFrame
 })
+
+#
+#
+#
+#
+#
+# PATCH-SLOT-1
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-2
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-3
+from typing import Union
+
+FrameEnhancerModel = Union[ FrameEnhancerModel, Literal['foolhardy_remacri_x4', 'nmkd_siax_x4', 'real_web_photo_x4', 'realistic_rescaler_x4', 'swin2_sr_x4'] ]
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-4
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# PATCH-SLOT-5
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

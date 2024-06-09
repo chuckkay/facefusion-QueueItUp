@@ -95,6 +95,41 @@ MODELS : ModelSet =\
 		'path': resolve_relative_path('../.assets/models/ultra_sharp_x4.onnx'),
 		'size': (128, 8, 4),
 		'scale': 4
+	},
+	'foolhardy_remacri_x4':
+	{
+		'url': 'https://huggingface.co/facefusion/models/resolve/main/foolhardy_remacri_x4.onnx',
+		'path': resolve_relative_path('../.assets/models/foolhardy_remacri_x4.onnx'),
+		'size': (128, 8, 4),
+		'scale': 4
+	},
+	'nmkd_siax_x4':
+	{
+		'url': 'https://huggingface.co/facefusion/models/resolve/main/nmkd_siax_x4.onnx',
+		'path': resolve_relative_path('../.assets/models/nmkd_siax_x4.onnx'),
+		'size': (128, 8, 4),
+		'scale': 4
+	},
+	'real_web_photo_x4':
+	{
+		'url': 'https://huggingface.co/facefusion/models/resolve/main/real_web_photo_x4.onnx',
+		'path': resolve_relative_path('../.assets/models/real_web_photo_x4.onnx'),
+		'size': (64, 4, 2),
+		'scale': 4
+	},
+	'realistic_rescaler_x4':
+	{
+		'url': 'https://huggingface.co/facefusion/models/resolve/main/realistic_rescaler_x4.onnx',
+		'path': resolve_relative_path('../.assets/models/realistic_rescaler_x4.onnx'),
+		'size': (128, 8, 4),
+		'scale': 4
+	},
+	'swin2_sr_x4':
+	{
+		'url': 'https://huggingface.co/facefusion/models/resolve/main/swin2_sr_x4.onnx',
+		'path': resolve_relative_path('../.assets/models/swin2_sr_x4.onnx'),
+		'size': (128, 8, 4),
+		'scale': 4
 	}
 }
 OPTIONS : Optional[OptionsWithModel] = None
