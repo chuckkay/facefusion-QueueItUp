@@ -1,0 +1,1 @@
+@echo off && conda activate facefusion && python install.py --onnxruntime cuda-11.8
